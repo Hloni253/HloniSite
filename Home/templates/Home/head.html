@@ -1,0 +1,42 @@
+{% block content %}
+
+    <header>
+        <div class="header-area header-transparent">
+            <div class="main-header ">
+                <div class="header-bottom  header-sticky">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="logo">
+                                    <a href=""><img src="/media/img/logo/logon.png" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-xl-10 col-lg-10">
+                                <div class="menu-wrapper d-flex align-items-center justify-content-end">
+                                    <div class="main-menu d-none d-lg-block">
+                                        <nav>
+                                            <ul id="navigation">                                                                                          
+                                                <li><a href="{% url 'Home:Home' %}">Subjects</a></li>
+												<li><a href="{% url 'Profile:List All Groups' %}">Groups</a></li>
+                                                <li><a href="{% url 'Notes:List All Notes' %}">Notes</a></li>
+                                                <li><a href="{% url 'Profile:Profile' %}">Profile</a></li>
+												
+                                                <li class="button-header margin-left "><a href="{% url 'Profile:Register' %}" class="btn">Join</a></li>
+                                                <li class="button-header"><a href="{% url 'Profile:Login' %}" class="btn btn3">Log in</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div> 
+							
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}

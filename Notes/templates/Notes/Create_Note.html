@@ -1,0 +1,66 @@
+{% extends 'Home/header.html' %}
+
+{% block content %}
+
+{% include 'Home/head.html' %}
+
+<main>
+	<section class="slider-area slider-area2">
+            <div class="slider-active">
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">Create Your Own Note</h1>
+                                    <nav aria-label="breadcrumb">
+                                            <p>Create your own notes which you can view at any time</p>
+											<p>You can save your notes as pdf's</p>
+											<p>By making your notes public you can help other people with your content</p>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </section>
+		
+			<form method="POST">
+				{% csrf_token %}
+				<div class="mt-10">
+					<input type="text" name="name" placeholder="Notes Name"
+					onfocus="this.placeholder = ''" onblur="this.placeholder = 'Notes title'" required
+					class="single-input">
+				</div>
+				<div class="mt-10">
+					<div class="form-select" id="default-select"">
+						<select name="subject">
+							{% for subject in subjects %}
+								<option value="{{ subject.id }}">{{ subject.title }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="mt-10">
+					<div class="form-select" id="default-select"">
+						<select name="status">
+							<option value="Pu">Public</option>
+							<option value="Pr">Private</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="mt-10">
+					<textarea class="single-textarea" name="notes" placeholder="Notes" onfocus="this.placeholder = ''"
+					onblur="this.placeholder = 'Notes'" required></textarea>
+				</div>
+				
+				<div class="form-group mt-3">
+                    <button type="submit" class="button button-contactForm boxed-btn">Create</button>
+                </div>
+
+		</form>
+</main>
+
+{% endblock %}

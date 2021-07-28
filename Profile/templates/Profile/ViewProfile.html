@@ -1,0 +1,135 @@
+{% extends 'Home/header.html' %}
+
+{% block content %}
+
+{% include 'Home/head.html' %}
+
+    <main>
+        <!--? slider Area Start-->
+        <section class="slider-area slider-area2">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">{{ profile.user.username }}'s Profile</h1>
+                                    <!-- breadcrumb Start-->
+                                    <nav aria-label="breadcrumb">
+                                        <p>View content from different people</p>
+                                    </nav>
+                                    <!-- breadcrumb End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+        </section>
+        <!-- Courses area start -->
+        <div class="courses-area section-padding40 fix">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="UsersNotes">{{ profile.user.username }}'s Notes</h2>
+                        </div>
+                    </div>
+                </div>
+				{% for note in notes %}
+					<article class="blog_item">
+						<div class="blog_details">
+							<a class="d-inline-block" href="">
+							<h2 class="blog-head" style="color: #2d2d2d;">{{ note.name }}</h2>
+							</a>
+							<p>{{ note.first_fifty_words }}...</p>
+					<p><a href="{{ note.save_note }}" class="genric-btn primary-border">Save</a></p>
+						</div>
+					</article>
+				{% endfor %}
+				</div>
+            </div>
+			<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="SavedNotes">Saved Notes</h2>
+                        </div>
+                    </div>
+                </div>
+					{% for note in notes %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ note.name }}</h2>
+								</a>
+								<p>{{ note.first_fifty_words }}</p>
+							<p><a href="{{ note.save_note }}" class="genric-btn primary-border">Save</a></p>
+							</div>
+						</article>
+					{% endfor %}
+				</div>
+            </div>
+			
+			<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="SavedVideos">Saved Videos</h2>
+                        </div>
+                    </div>
+                </div>
+					{% for video in videos %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="{{ note.view_note }}">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ video.name }}</h2>
+								</a>
+								<p><a href="{{ video.save_video }}" class="genric-btn primary-border">Save To Profile</a>  <a href="{% url 'Videos:Download Video' video_id=video.id %}" class="genric-btn primary-border">Download Video</a></p>
+							</div>
+						</article>
+					{% endfor %}
+            </div>
+			
+			<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="SavedSites">Saved Sites</h2>
+                        </div>
+                    </div>
+                </div>
+					{% for site in sites %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ site.name }}</h2>
+							<p><a href="{{ site.save_site }}" class="genric-btn primary-border">Save To Profile</a></p>
+								</a>
+							</div>
+						</article>
+					{% endfor %}
+            </div>
+			
+			<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="SavedSites">Groups</h2>
+                        </div>
+                    </div>
+                </div>
+					{% for group in groups %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="{% url 'Profile:View Group' group_id=group.id %}">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ group.name }}</h2>
+								</a>
+								<p>{{ group.description }}</p>
+							</div>
+						</article>
+					{% endfor %}
+            </div>
+        </div>
+    </main>
+	
+{% endblock %}

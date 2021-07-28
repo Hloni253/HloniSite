@@ -1,0 +1,154 @@
+{% extends 'Home/header.html' %}
+
+{% block content %}
+
+{% include 'Home/head.html' %}
+
+    <main>
+        <!--? slider Area Start-->
+        <section class="slider-area slider-area2">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">{{ group.name }}</h1>
+                                    <!-- breadcrumb Start-->
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <p>{{ group.description }}</p>
+											<hr>
+                                        </ol>
+                                    </nav>
+                                    <!-- breadcrumb End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+        </section>
+		<section class="team-area section-padding40 fix">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="GroupMembers">Group Members</h2>
+							<h3><a href="{% url 'Profile:Join Group' group_id=group.id %}" style="color:blue">Join Group</a></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-active">
+					{% for member in group.members.all %}
+                    <div class="single-cat text-center">
+                        <div class="cat-icon">
+                            <!--<img src="assets/img/gallery/team1.png" alt="">-->
+                        </div>
+                        <div class="cat-cap">
+                            <h5><a href="{% url 'Profile:View Profile' profile_slug=member.username %}">{{ member.username }}</a></h5>
+                            <p>{{ member.profile.description }}</p>
+                        </div>
+                    </div>
+					{% endfor %}
+                </div>
+				<br>
+				<div class="section-title text-center">
+					<p><a href="{% url 'Profile:List All Group Members' group_id=group.id %}" style="color:blue">View All Group Members</a></p>
+				</div>
+            </div>
+        </section>
+
+
+
+        <div class="courses-area section-padding40 fix">
+			<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="GroupNotes">Group Notes</h2>
+							<h3><a href="{{ group.add_note }}" style="color:blue">Add Note</a></h3>
+                        </div>
+                    </div>
+                </div>
+				{% for note in group.notes.all %}
+					<article class="blog_item">
+						<div class="blog_details">
+							<a class="d-inline-block" href="">
+							<h2 class="blog-head" style="color: #2d2d2d;">{{ note.name }}</h2>
+							</a>
+							<p>{{ note.first_fifty_words }}...</p>
+						</div>
+					</article>
+				{% endfor %}
+				</div>
+				
+				<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="GroupSites">Group Sites</h2>
+							<h3><a href="{{ group.add_site }}" style="color:blue">Add Site</a></h3>
+                        </div>
+                    </div>
+                </div>
+				{% for site in group.sites.all %}
+					<article class="blog_item">
+						<div class="blog_details">
+							<a class="d-inline-block" href="">
+							<h2 class="blog-head" style="color: #2d2d2d;">{{ site.name }}</h2>
+							</a>
+							<p>{{ site.description }}...</p>
+						</div>
+					</article>
+				{% endfor %}
+				</div>
+				
+				<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="GroupVideos">Group Videos</h2>
+							<h3><a href="{{ group.add_video }}" style="color:blue">Add Video</a></h3>
+                        </div>
+                    </div>
+                </div>
+				{% for video in group.videos.all %}
+					<article class="blog_item">
+						<div class="blog_details">
+							<a class="d-inline-block" href="">
+							<h2 class="blog-head" style="color: #2d2d2d;">{{ video.name }}</h2>
+							</a>
+						</div>
+					</article>
+				{% endfor %}
+				</div>
+				
+		<section>
+			<div class="courses-area section-padding40 fix">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-xl-7 col-lg-8">
+							<div class="section-tittle text-center mb-55">
+								<h2 id="GroupComment">Group Comments</h2>
+								<h3><a href="{% url 'Profile:Write Comment' group_id=group.id %}" style="color:blue">Write Comment</a></h3>
+							</div>
+						</div>
+					</div>
+					{% for comment in comments %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ comment.user.username }}</h2>
+								</a>
+								<p>{{ comment.comment }}</p>
+							</div>
+						</article>
+					{% endfor %}
+					</div>
+				</div>
+		</section>
+				
+        </div>
+    </main>
+	
+{% endblock %}

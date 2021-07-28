@@ -1,0 +1,94 @@
+{% extends 'Home/header.html' %}
+
+{% block content %}
+
+{% include 'Home/head.html' %}
+
+<main>
+   <section class="slider-area slider-area2">
+     <div class="slider-active">
+       <div class="single-slider slider-height2">
+         <div class="container">
+           <div class="row">
+             <div class="col-xl-8 col-lg-11 col-md-12">
+               <div class="hero__caption hero__caption2">
+                 <h1 data-animation="bounceIn" data-delay="0.2s">{{ note.name }}</h1>
+			   <h2><a href="{{ note.view_pdf }}">View As PDF</a></h2>
+            </div>
+         </div>
+      </div>
+   </div>          
+</div>
+</div>
+</section>
+<section class="blog_area single-post-area section-padding">
+   <div class="container">
+				  <p>
+					{{ note.notes }}
+				  </p>
+				<p><a href="{{ note.save_note }}" class="genric-btn primary-border">Save</a></p>
+            </div>
+            <div class="navigation-top">
+
+      <div class="blog-author">
+         <div class="media align-items-center">
+            <div class="media-body">
+               <a href="{% url 'Profile:View Profile' profile_slug=note.user.username %}">
+                  <h4><li class="fa fa-user">Written By {{ note.user.username }}</li></h4>
+               </a>
+            </div>
+         </div>
+      </div>
+      <div class="comment-form">
+		  <h4>Leave A Comment</h4>
+			 <form class="form-contact comment_form" method="POST">
+				{% csrf_token %}
+				<div class="row">
+				   <div class="col-12">
+					  <div class="form-group">
+						 <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+						 placeholder="Write Comment"></textarea>
+					  </div>
+				   </div>
+				</div>
+				<div class="form-group">
+				   <button type="submit" class="button button-contactForm btn_1 boxed-btn">Post Comment</button>
+				</div>
+			 </form>
+		<div>
+			<br>
+		</div>
+		  <h4>{{ comments.count }} Comments</h4>
+			 {% for comment in comments %}
+				 <div class="comment-list">
+					<div class="single-comment justify-content-between d-flex">
+					   <div class="user justify-content-between d-flex">
+						  <div class="desc">
+							 <p class="comment">
+								{{ comment.comment }}
+							 </p>
+							 <div class="d-flex justify-content-between">
+								<div class="d-flex align-items-center">
+								   <p>Comment written by <a href="{% url 'Profile:View Profile' profile_slug=comment.user.username %}" style="color:blue">{{ comment.user.username }}</a>
+								   <p class="date">On  {{ comment.date.date }} </p></p>
+								</div>
+							 </div>
+							 <hr>
+						  </div>
+					   </div>
+					</div>
+				 </div>
+			{% endfor %}
+
+         
+      </div>
+   </div>
+         
+        
+ 
+   </div>
+</div>
+</section>
+</main>
+
+{% endblock %}

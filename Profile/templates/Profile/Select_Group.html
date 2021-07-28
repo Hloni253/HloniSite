@@ -1,0 +1,121 @@
+{% extends 'Home/header.html' %}
+
+{% block content %}
+
+{% include 'Home/head.html' %}
+
+    <main>
+        <!--? slider Area Start-->
+        <section class="slider-area slider-area2">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">Add Content For {{ group.name }}</h1>
+                                    <!-- breadcrumb Start-->
+                                    <nav aria-label="breadcrumb">
+                                        <p>Add information from your profile</p>
+                                    </nav>
+                                    <!-- breadcrumb End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+        </section>
+        <!-- Courses area start -->
+		{% if notes != None %}
+			<div class="courses-area section-padding40 fix">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-xl-7 col-lg-8">
+							<div class="section-tittle text-center mb-55">
+								<h2>Select Note</h2>
+								<h3><a href="" style="color:blue">Write Note</a></h3>
+							</div>
+						</div>
+					</div>
+					{% for c_note in profile.copied_notes.all %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="{% url 'Profile:Select Note' group_id=group.id note_id=c_note.id %}">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ c_note.name }}</h2>
+								</a>
+								<p>{{ c_note.first_fifty_words }}</p>
+							</div>
+						</article>
+					{% endfor %}
+				</div>
+				
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-xl-7 col-lg-8">
+							<div class="section-tittle text-center mb-55">
+								<!--<h2>Select Note</h2>-->
+							</div>
+						</div>
+					</div>
+					{% for my_note in notes %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="{% url 'Profile:Select Note' group_id=group.id note_id=my_note.id %}">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ my_note.name }}</h2>
+								</a>
+								<p>{{ my_note.first_fifty_words }}</p>
+							</div>
+						</article>
+					{% endfor %}
+				</div>
+
+			</div>
+		{% elif sites != None %}
+			<div class="courses-area section-padding40 fix">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-xl-7 col-lg-8">
+							<div class="section-tittle text-center mb-55">
+								<h2>Select Site</h2>
+								<h3><a href="" style="color:blue">View Sites</a></h3>
+							</div>
+						</div>
+					</div>
+					{% for site in sites %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="{% url 'Profile:Select Site' group_id=group.id note_id=site.id %}">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ site.name }}</h2>
+								</a>
+								<p>{{ site.description }}</p>
+							</div>
+						</article>
+					{% endfor %}
+				</div>
+			</div>
+		{% elif videos != None %}
+			<div class="courses-area section-padding40 fix">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-xl-7 col-lg-8">
+							<div class="section-tittle text-center mb-55">
+								<h2>Select Video</h2>
+								<h3><a href="" style="color:blue">View Videos</a></h3>
+							</div>
+						</div>
+					</div>
+					{% for site in sites %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="{% url 'Profile:Select Video' group_id=group.id note_id=video.id %}">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ video.name }}</h2>
+								</a>
+							</div>
+						</article>
+					{% endfor %}
+				</div>
+			</div>
+		{% endif %}
+    </main>
+	
+{% endblock %}

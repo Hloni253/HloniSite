@@ -1,0 +1,4 @@
+{% for image in images %}
+	<p>{{ image.name }}</p>
+	<img src="{{ image.image.url }}" class="rounded-circle" width="220" height="150">
+{% endfor %}

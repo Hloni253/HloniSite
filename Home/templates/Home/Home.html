@@ -1,0 +1,147 @@
+{% extends 'Home/header.html' %}
+
+{% block content %}
+
+{% include 'Home/head.html' %}
+
+    <main>
+        <section class="slider-area ">
+            <div class="slider-active">
+                <div class="single-slider slider-height d-flex align-items-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-7 col-md-12">
+                                <div class="hero__caption">
+                                    <h1 data-animation="fadeInLeft" data-delay="0.2s">Online Study<br> Guide</h1>
+									<p data-animation="fadeInLeft" data-delay="0.4s">Find key concepts to study in the curriculum.<br> Use videos and additional resources to simplify things.<br> Read and write notes by other users<br></p>
+									{% if logged_in %}
+										<a href="{% url 'Profile:Profile' %}" class="btn hero-btn" data-animation="fadeInLeft" data-delay="0.7s">View Profile</a>
+									{% else %}
+										<a href="{% url 'Profile:Register' %}" class="btn hero-btn" data-animation="fadeInLeft" data-delay="0.7s">Join for Free</a>
+									{% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </section>
+        <div class="services-area">
+            <div class="container">
+                <div class="row justify-content-sm-center">
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="single-services mb-30">
+                            <div class="features-icon">
+                                <img src="/media/img/icon/icon1.svg" alt="">
+                            </div>
+                            <div class="features-caption">
+                                <h3>Study Guides</h3>
+                                <p>Online study guides for high school courses</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="single-services mb-30">
+                            <div class="features-icon">
+                                <img src="/media/img/icon/icon2.svg" alt="">
+                            </div>
+                            <div class="features-caption">
+                                <h3>Videos And Sites</h3>
+                                <p>Find the best videos and websites to simplify key concepts</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="single-services mb-30">
+                            <div class="features-icon">
+                                <img src="/media/img/icon/icon3.svg" alt="">
+                            </div>
+                            <div class="features-caption">
+                                <h3>Notes</h3>
+                                <p>Find notes written by other users to make concepts easier</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		{% for grade in grades %}
+        <div class="courses-area section-padding40 fix">
+            <div class="container">
+				<div class="row justify-content-center">
+					<div class="col-xl-7 col-lg-8">
+						<div class="section-tittle text-center mb-55">
+							<h2>{{ grade.title }}</h2>
+							<p style="color:grey">Scroll For More Subjects -->></p>
+						</div>
+					</div>
+				</div>
+                <div class="courses-actives">
+						{% for subject in grade.subjects %}
+						<div class="properties pb-20">
+							<div class="properties__card">
+								<div class="properties__img overlay1">
+									<img src="{{ subject.image }}" alt="">
+								</div>
+								<div class="properties__caption">
+									<p>{{ subject.title }}</p>
+									
+									{% for key, value in subject.list_content.items %}
+										<h3><a href="{{ value }}">{{ key }}</a></h3>
+										<br>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					 </div>
+                </div>
+            </div>
+			{% endfor %}
+			
+        <section class="about-area1 fix pt-10">
+            <div class="support-wrapper align-items-center">
+                <div class="left-content1">
+                    <div class="about-icon">
+                        <img src="/media/img/icon/about.svg" alt="">
+                    </div>
+
+                    <div class="section-tittle section-tittle2 mb-55">
+                        <div class="front-text">
+                            <h2 class="">Learn better online with the best content and resources</h2>
+                            <p>Content has been gathered from various sources in order to create an
+							 experience of simplified learning. Through this platform, you can:</p>
+                        </div>
+                    </div>
+                    <div class="single-features">
+                        <div class="features-icon">
+                            <img src="/media/img/icon/right-icon.svg" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <p>Find content that matches with your needs easier and more efficiently.</p>
+                        </div>
+                    </div>
+                    <div class="single-features">
+                        <div class="features-icon">
+                            <img src="/media/img/icon/right-icon.svg" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <p>Gather information from a variety of sources including videos.</p>
+                        </div>
+                    </div>
+
+                    <div class="single-features">
+                        <div class="features-icon">
+                            <img src="/media/img/icon/right-icon.svg" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <p>Learn with your peers and share information amongst each other.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+{% endblock %}

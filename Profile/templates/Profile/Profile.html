@@ -1,0 +1,209 @@
+{% extends 'Home/header.html' %}
+
+{% block content %}
+
+{% include 'Home/head.html' %}
+
+    <main>
+        <!--? slider Area Start-->
+        <section class="slider-area slider-area2">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">Welcome {{ profile.user.username }}</h1>
+                                    <!-- breadcrumb Start-->
+									{% if profile.description %}
+                                    <nav aria-label="breadcrumb">
+                                            <p>{{ profile.description }}</p>
+											<p><a href="{% url 'Profile:Add Description' %}" style="color:blue">Change Description</a></p>
+                                    </nav>
+									{% else %}
+									<nav aria-label="breadcrumb">
+                                            <li><p>This is your unique profile where you can view everything you've saved</p></li>
+											<li><p><a href="{% url 'Profile:Add Description' %}" style="color:blue">Add Description</a></p></li>
+                                    </nav>
+									{% endif %}
+                                    <!-- breadcrumb End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </section>
+        <!-- Courses area start -->
+        <div class="courses-area section-padding40 fix">
+			<div class="row">
+			<div class="col-lg-4">
+			    <div class="blog_right_sidebar">
+				<aside class="single_sidebar_widget search_widget">
+					<form method="GET">
+						<div class="form-group">
+							<div class="input-group mb-3">
+								<input type="text" name="search" class="form-control" placeholder='Search Keyword'
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Search Keyword'">
+								<div class="input-group-append">
+									<button class="btns" type="button"><i class="ti-search"></i></button>
+								</div>
+							</div>
+						</div>
+						<button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+						type="submit">Search</button>
+					</form>
+					<br>
+					<p><a href="{% url 'Notes:Create Note' %}" style="color:blue">Create Notes</a></p>
+					<p><a href="{% url 'Profile:Create Group' %}" style="color:blue">Create Group</a></p>
+					<p><a href="{% url 'Profile:List All Groups' %}" style="color:blue">View Groups</a></p>
+				</aside>
+				
+				<aside class="single_sidebar_widget post_category_widget">
+					<h4 class="widget_title" style="color: #2d2d2d;">Navigate</h4>
+					<ul class="list cat-list">
+						<li>
+							<a href="#MyNotes" class="d-flex">
+								<p>My Notes</p>
+								<p>({{ notes.count }})</p>
+							</a>
+						</li>
+						<li>
+							<a href="#SavedNotes" class="d-flex">
+								<p>Saved Notes</p>
+								<p>({{ saved_notes.count }})</p>
+							</a>
+						</li>
+						<li>
+							<a href="#SavedVideos" class="d-flex">
+								<p>Saved Videos</p>
+								<p>({{ videos.count }})</p>
+							</a>
+						</li>
+						<li>
+							<a href="#SavedSites" class="d-flex">
+								<p>Saved Sites</p>
+								<p>({{ sites.count }})</p>
+							</a>
+						</li>
+						<li>
+							<a href="#Groups" class="d-flex">
+								<p>Groups</p>
+								<p>({{ groups.count }})</p>
+							</a>
+						</li>
+					</ul>
+				</aside>
+				</div>
+			</div>
+			
+			<div class="col-lg-8 mb-5 mb-lg-0">
+		
+			<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="MyNotes">My Notes</h2>
+                        </div>
+                    </div>
+                </div>
+					{% for note in notes %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ note.name }}</h2>
+								</a>
+								<p>{{ note.first_fifty_words }}...</p>
+							</div>
+						</article>
+					{% endfor %}
+            </div>
+			
+			<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="SavedNotes">Saved Notes</h2>
+                        </div>
+                    </div>
+                </div>
+					{% for saved_note in saved_notes %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ saved_note.name }}</h2>
+								</a>
+								<p>{{ saved_note.first_fifty_words }}...</p>
+								<p><a href="{{ saved_note.remove_note }}" class="genric-btn warning-border">Remove</a></p>
+							</div>
+						</article>
+					{% endfor %}
+            </div>
+			
+			<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="SavedVideos">Saved Videos</h2>
+                        </div>
+                    </div>
+                </div>
+					{% for video in videos %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ video.name }}</h2>
+								</a>
+								<p><a href="{{ video.remove_video }}" class="genric-btn warning-border">Remove</a></p>
+							</div>
+						</article>
+					{% endfor %}
+            </div>
+			
+			<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="SavedSites">Saved Sites</h2>
+                        </div>
+                    </div>
+                </div>
+					{% for site in sites %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ site.name }}</h2>
+								</a>
+								<p><a href="{{ site.remove_site }}" class="genric-btn warning-border">Remove</a></p>
+							</div>
+						</article>
+					{% endfor %}
+            </div>
+			
+			<div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2 id="Groups">Groups</h2>
+                        </div>
+                    </div>
+                </div>
+					{% for group in groups %}
+						<article class="blog_item">
+							<div class="blog_details">
+								<a class="d-inline-block" href="{% url 'Profile:View Group' group_id=group.id %}">
+								<h2 class="blog-head" style="color: #2d2d2d;">{{ group.name }}</h2>
+								</a>
+							<p>{{ group.description }}</p>
+							</div>
+						</article>
+					{% endfor %}
+            </div>
+			</div>
+		</div>
+        </div>
+    </main>
+	
+{% endblock %}

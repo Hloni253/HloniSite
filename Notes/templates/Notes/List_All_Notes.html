@@ -1,0 +1,97 @@
+{% extends 'Home/header.html' %}
+
+{% block content %}
+
+{% include 'Home/head.html' %}
+
+    <main>
+        <section class="slider-area slider-area2">
+            <div class="slider-active">
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">Collection Of All Notes</h1>
+									<p>Notes are created by teachers and students to simplify concepts</p>
+									<p>You can create your own notes too.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </section>
+        <section class="blog_area section-padding">
+            <div class="container">
+                <div class="row">
+					<div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget search_widget">
+                                <form method="GET">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" name="search" class="form-control" placeholder='Search Keyword'
+                                            onfocus="this.placeholder = ''"
+                                            onblur="this.placeholder = 'Search Keyword'">
+                                            <div class="input-group-append">
+                                                <button class="btns" type="button"><i class="ti-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                    type="submit">Search</button>
+                                </form>
+								<br>
+								<p><a href="{% url 'Notes:Create Note' %}" style="color:blue">Write Your Own Notes</a></p>
+								<p><a href="{% url 'Profile:List All Groups' %}" style="color:blue">View Groups</a></p>
+                            </aside>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 mb-5 mb-lg-0">						
+                        <div class="blog_left_sidebar">
+						{% for subject in subjects %}
+						<h1>{{ subject.title }}</h1>
+						
+							{% for note in site_notes %}
+								<article class="blog_item">
+											<div class="blog_details">
+												<a class="d-inline-block" href="{{ note.view_note }}">
+													<h2 class="blog-head" style="color: #2d2d2d;">{{ note.name }}</h2>
+												</a>
+												<p>{{ note.description }}</p>
+												<ul class="blog-info-link">
+													<li><a href="{% url 'Profile:View Profile' profile_slug=note.user.username %}"><i class="fa fa-user"></i>{{ note.user.username }}</a></li>
+													<li><a href="#"><i class="fa fa-comments"></i>{{ note.site_comments.count }} Comments</a></li>
+												</ul>
+											</div>
+										</article>
+							{% endfor %}
+							
+							
+							{% for note in subject.list_all_notes %}
+								{% if note.status == "Pu" %}
+										<article class="blog_item">
+											<div class="blog_details">
+												<a class="d-inline-block" href="{{ note.view_note }}">
+													<h2 class="blog-head" style="color: #2d2d2d;">{{ note.name }}</h2>
+												</a>
+												<p>{{ note.first_fifty_words }}...</p>
+												<ul class="blog-info-link">
+													<li><a href="{% url 'Profile:View Profile' profile_slug=note.user.username %}"><i class="fa fa-user"></i>{{ note.user.username }}</a></li>
+													<li><a href="#"><i class="fa fa-comments"></i>{{ note.comments.count }} Comments</a></li>
+												</ul>
+											</div>
+										</article>
+								{% endif %}
+							{% endfor %}
+					{% endfor %}
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'Home/header.html' %}
+
+{% block content %}
+
+{% include 'Home/head.html' %}
+
+<main>
+	<section class="slider-area slider-area2">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">Create Group</h1>
+                                    <!-- breadcrumb Start-->
+                                    <nav aria-label="breadcrumb">
+                                        <p>Create your group</p>
+                                    </nav>
+                                    <!-- breadcrumb End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </section>
+				
+			<form method="POST">
+				{% csrf_token %}
+				<div class="mt-10">
+					<input type="text" name="name" placeholder="Group Name"
+					onfocus="this.placeholder = ''" onblur="this.placeholder = 'Group Name'" required
+					class="single-input">
+				</div>
+				
+				<div class="mt-10">
+					<div class="form-select" id="default-select"">
+						<select name="subject">
+							{% for subject in subjects %}
+								<option value="{{ subject.id }}">{{ subject.title }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				
+				<div class="mt-10">
+					<textarea class="single-textarea" name="description" placeholder="Group Description" onfocus="this.placeholder = ''"
+					onblur="this.placeholder = 'Group Description'" required></textarea>
+				</div>
+				
+				<div class="form-group mt-3">
+                    <button type="submit" class="button button-contactForm boxed-btn">Create Group</button>
+                </div>
+
+		</form>
+</main>
+
+{% endblock %}
